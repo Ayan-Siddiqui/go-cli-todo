@@ -1,11 +1,5 @@
 [
 	{
-		"Title": "Buy Groceries",
-		"Completed": false,
-		"CreatedAt": "2025-06-25T17:38:29.1985297+05:30",
-		"CompletedAt": null
-	},
-	{
 		"Title": "Walk the dog",
 		"Completed": true,
 		"CreatedAt": "2025-06-25T21:42:14.8079824+05:30",
@@ -13,14 +7,14 @@
 	},
 	{
 		"Title": "Touch some grass",
-		"Completed": false,
+		"Completed": true,
 		"CreatedAt": "2025-06-26T00:25:45.5746977+05:30",
-		"CompletedAt": null
+		"CompletedAt": "2025-06-26T12:25:40.0820932+05:30"
 	},
 	{
 		"Title": "My money doesn't jiggle it folds",
 		"Completed": false,
 		"CreatedAt": "2025-06-26T00:34:08.3830048+05:30",
-		"CompletedAt": null
+		"CompletedAt": "2025-06-26T12:24:54.6656802+05:30"
 	}
 ]
