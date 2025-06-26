@@ -49,6 +49,9 @@ func (cf *CommandFlags) Parse(input string) {
 			cf.Index = parseIndex(args[1])
 		}
 		fmt.Printf("Completed status changed\n")
+
+	default:
+		fmt.Printf("%+v is not a valid command\n", cf.Command)
 	}
 }
 
