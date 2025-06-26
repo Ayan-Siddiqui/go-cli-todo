@@ -34,6 +34,12 @@ git clone https://github.com/Ayan-Siddiqui/go-cli-todo.git
 cd go-cli-todo
 ```
 
+- Install all the dependencies
+
+```bash
+go mod tidy
+```
+
 - Build the Application
 
 ```bash
