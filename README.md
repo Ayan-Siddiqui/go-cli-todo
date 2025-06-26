@@ -21,18 +21,28 @@ A simple command-line based Todo list manager built in Go. It allows you to add,
 ### Prerequisites
 
 - [Go 1.20+](https://golang.org/dl/) installed
-
-### Clone and Build
+  
+- Clone the repo into the desired folder
 
 ```bash
 git clone https://github.com/Ayan-Siddiqui/go-cli-todo.git
+```
+
+- Change Directory
+
+```bash
 cd go-cli-todo
+```
+
+- Build the Application
+
+```bash
 go build -o todo-cli
 ```
 
-## Usage
+## 🛠️ Usage
 
-### Run the CLI 
+### To run this application, execute
 
 ```bash
 ./todo-cli
