@@ -1,62 +1,81 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
 )
 
 type CommandFlags struct {
-	Add    string
-	Del    int
-	Edit   string
-	Toggle int
-	List   bool
+	Title   string
+	Index   int
+	Command string
 }
 
 func NewCommandFlags() *CommandFlags {
-	cf := CommandFlags{}
+	return &CommandFlags{}
+}
 
-	flag.StringVar(&cf.Add, "add", "", "Add a new todo title")
-	flag.StringVar(&cf.Edit, "edit", "", "Edit a todo title by specifying its id. id:new_title")
-	flag.IntVar(&cf.Del, "del", -1, "Delete a todo by specifying its id")
-	flag.IntVar(&cf.Toggle, "toggle", -1, "Change the 'completed' status of a todo")
-	flag.BoolVar(&cf.List, "list", false, "List all the todos")
+func (cf *CommandFlags) Parse(input string) {
+	args := strings.Fields(input)
+	if len(args) == 0 {
+		return
+	}
 
-	flag.Parse()
+	cf.Command = args[0]
 
-	return &cf
+	switch cf.Command {
+	case "add":
+		if len(args) > 1 {
+			cf.Title = strings.Join(args[1:], " ")
+		}
+		fmt.Printf("Todo added: %+v\n", cf.Title)
+
+	case "edit":
+		if len(args) > 2 {
+			cf.Index = parseIndex(args[1])
+			cf.Title = strings.Join(args[2:], " ")
+		}
+		fmt.Printf("Todo with id %+v edited\n", cf.Index)
+
+	case "delete":
+		if len(args) > 1 {
+			cf.Index = parseIndex(args[1])
+		}
+		fmt.Printf("Todo with id %+v deleted\n", cf.Index)
+
+	case "toggle":
+		if len(args) > 1 {
+			cf.Index = parseIndex(args[1])
+		}
+		fmt.Printf("Completed status changed\n")
+	}
 }
 
 func (cf *CommandFlags) Execute(todos *Todos) {
-	switch {
-	case cf.List:
+	switch cf.Command {
+
+	case "list":
 		todos.print()
 
-	case cf.Add != "":
-		todos.add(cf.Add)
+	case "add":
+		todos.add(cf.Title)
 
-	case cf.Edit != "":
-		parts := strings.SplitN(cf.Edit, ":", 2)
-		if len(parts) != 2 {
-			fmt.Println("Error, invalid format for edit. Please use id:new_title")
-			os.Exit(1)
-		}
+	case "edit":
+		todos.edit(cf.Index, cf.Title)
 
-		index, err := strconv.Atoi(parts[0])
+	case "delete":
+		todos.delete(cf.Index)
 
-		if err != nil {
-			fmt.Println("Error: invalid id for edit")
-			os.Exit(1)
-		}
-		todos.edit(index, parts[1])
-
-	case cf.Del != -1:
-		todos.delete(cf.Del)
-
-	case cf.Toggle != -1:
-		todos.toggle(cf.Toggle)
+	case "toggle":
+		todos.toggle(cf.Index)
 	}
+}
+
+func parseIndex(s string) int {
+	index, err := strconv.Atoi(s)
+	if err != nil {
+		return -1
+	}
+	return index
 }
