@@ -28,3 +28,6 @@ A simple command-line based Todo list manager built in Go. It allows you to add,
 git clone https://github.com/Ayan-Siddiqui/go-cli-todo.git
 cd go-cli-todo
 go build -o todo-cli
+
+## Usage
+./todo-cli
